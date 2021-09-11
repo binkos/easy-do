@@ -7,3 +7,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Easy do"
 include ':app'
+include ':onboarding'
+include ':sign-in'
+include ':main'
