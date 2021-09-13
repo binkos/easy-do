@@ -3,6 +3,7 @@ package com.proxer.easydo.app.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -16,7 +17,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             var isDarkTheme by rememberSaveable { mutableStateOf(false) }
             TestTheme(isDarkTheme = isDarkTheme) {
-                MainNavGraph { isDarkTheme = it }
+                Surface {
+                    MainNavGraph { isDarkTheme = it }
+                }
             }
         }
     }
