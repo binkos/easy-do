@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.proxer.easydo.main.ui.screen.MAIN_DESTINATION
 import com.proxer.easydo.main.ui.screen.MainScreen
 import com.proxer.easydo.onboarding.ui.screen.ONBOARDING_DESTINATION

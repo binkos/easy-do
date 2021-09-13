@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+    <string name="create_simple_tasks">Create simple tasks</string>
+    <string name="plan_your_day">Plan your day</string>
+    <string name="plan_your_every_day_activity">Plan your every day activity</string>
+    <string name="add_notifications">Add notifications</string>
+    <string name="see_progress">See progress</string>
+</resources>
