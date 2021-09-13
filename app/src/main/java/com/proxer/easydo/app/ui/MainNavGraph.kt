@@ -13,7 +13,7 @@ import com.proxer.easydo.signin.ui.screen.SIGN_IN_DESTINATION
 import com.proxer.easydo.signin.ui.screen.SignIn
 
 @Composable
-fun MainNavGraph() {
+fun MainNavGraph(onThemeChanged: (Boolean) -> Unit) {
     val navController = rememberNavController()
     val actions = Actions(navController)
 
