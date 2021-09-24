@@ -88,11 +88,13 @@ private fun NavigationSheet(onMenuOpenChanged: () -> Unit) {
 fun DrawerMenu(onBackPressed: () -> Unit) {
     Column {
         OutlinedButton(
-            modifier = Modifier.align(Alignment.End).size(48.dp),
+            modifier = Modifier
+                .align(Alignment.End)
+                .size(48.dp),
             onClick = { onBackPressed() },
             shape = CircleShape,
             border = BorderStroke(1.dp, Color.White),
-            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent),
+            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_right_arrow),
