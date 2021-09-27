@@ -6,6 +6,8 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -44,6 +46,35 @@ fun MainScreen() {
                 .fillMaxSize()
 
         ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(R.string.categories).uppercase()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                item { Spacer(Modifier) }
+                item { Category(12, 6, "Business", Color.Black) }
+                item { Category(8, 7, "Personal", Color.Cyan) }
+                item { Category(5, 1, "Family", Color.Red) }
+                item { Category(2, 0, "Study", Color.Magenta) }
+                item { Category(10, 4, "GirlFriend", Color.Yellow) }
+                item { CreateNewCategory() }
+                item { Spacer(Modifier) }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(R.string.todays_tasks).uppercase()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                items(5) {
+                    Task(false, Color.Yellow, "Task Name")
+                }
+            }
+
             Spacer(modifier = Modifier.weight(1f))
             NavigationSheet { isCollapsed = !isCollapsed }
         }
@@ -57,80 +88,6 @@ fun MainScreen() {
         ) {
             DrawerMenu { isCollapsed = true }
         }
-    }
-}
-
-@Composable
-private fun NavigationSheet(onMenuOpenChanged: () -> Unit) {
-    Row(modifier = Modifier.padding(vertical = 8.dp, horizontal = 10.dp)) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_menu),
-            contentDescription = null,
-            tint = Color.White,
-            modifier = Modifier.clickable { onMenuOpenChanged() }
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = null,
-            tint = Color.White
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_notifications),
-            contentDescription = null,
-            tint = Color.White
-        )
-    }
-}
-
-@Composable
-fun DrawerMenu(onBackPressed: () -> Unit) {
-    Column {
-        OutlinedButton(
-            modifier = Modifier
-                .align(Alignment.End)
-                .size(48.dp),
-            onClick = { onBackPressed() },
-            shape = CircleShape,
-            border = BorderStroke(1.dp, Color.White),
-            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent)
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_right_arrow),
-                contentDescription = null,
-                tint = Color.White,
-                modifier = Modifier.rotate(180f)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .size(72.dp)
-                .background(Color.Gray, CircleShape)
-                .align(Alignment.Start)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Vlad Provalionok", fontSize = 28.sp, color = Color.White)
-        Spacer(modifier = Modifier.height(16.dp))
-        listOf(
-            Pair(R.drawable.ic_menu, R.string.templates),
-            Pair(R.drawable.ic_search, R.string.categories),
-            Pair(R.drawable.ic_notifications, R.string.analytics),
-        ).forEach {
-            MenuItem(iconId = it.first, textId = it.second)
-            Spacer(modifier = Modifier.height(8.dp))
-        }
-        Spacer(modifier = Modifier.weight(1f))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(60.dp)
-                .background(Color.Cyan)
-        )
-        Spacer(modifier = Modifier.height(2.dp))
-        Text(text = "Good", color = Color.LightGray)
-        Text(text = "Consistancy", fontSize = 28.sp, color = Color.White)
-        Spacer(modifier = Modifier.height(12.dp))
     }
 }
 
