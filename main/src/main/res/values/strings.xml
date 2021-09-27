@@ -3,4 +3,6 @@
     <string name="templates">Templates</string>
     <string name="categories">Categories</string>
     <string name="analytics">Analytics</string>
+    <string name="tasks_count">%1$d tasks</string>
+    <string name="todays_tasks">Today\'s tasks</string>
 </resources>
