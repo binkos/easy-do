@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,31 +20,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.proxer.easydo.main.R
+import com.proxer.easydo.main.ui.model.Task
 
 @Composable
-fun Task(
-    isCompleted: Boolean,
-    color: Color,
-    taskName: String
-) {
-    var isCompletedState by remember { mutableStateOf(isCompleted) }
+fun Task(model: Task, onTaskClickListener: (task: Task) -> Unit) {
     Row(
         modifier = Modifier
             .padding(horizontal = 8.dp)
             .clip(RoundedCornerShape(8.dp))
-            .background(Color.LightGray)
+            .background(MaterialTheme.colors.primary)
             .padding(horizontal = 8.dp)
             .height(48.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        CompletionIndicator(isCompleted = isCompletedState, color = color) {
-            isCompletedState = !isCompletedState
+        CompletionIndicator(isCompleted = model.isCompleted, color = Color(model.color)) {
+            onTaskClickListener(model)
         }
         Spacer(modifier = Modifier.width(12.dp))
         Text(
-            text = taskName,
-            textDecoration = if (isCompletedState) TextDecoration.LineThrough else null
+            text = model.name,
+            textDecoration = if (model.isCompleted) TextDecoration.LineThrough else null,
+            color = Color.White
         )
     }
 }
