@@ -44,13 +44,10 @@ class MainViewModel : ViewModel() {
                     val oldTask = state.value.tasks.first { it.id == event.task.id }
                     val newTask = oldTask.copy(isCompleted = !oldTask.isCompleted)
 
-                    val newCategories = state
-                        .value
-                        .categories
-                        .map {
-                            return@map if (it.id == event.task.categoryId) newCategory
-                            else it
-                        }
+                    val newCategories = state.value.categories.map {
+                        return@map if (it.id == event.task.categoryId) newCategory
+                        else it
+                    }
 
                     val newTasks = state.value.tasks.map {
                         return@map if (it.id == event.task.id) newTask
