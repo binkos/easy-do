@@ -1,5 +1,7 @@
 package com.proxer.easydo.main.ui.screen
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.proxer.easydo.main.R
@@ -62,8 +65,20 @@ fun DrawerMenu(onBackPressed: () -> Unit) {
                 .background(Color.Cyan)
         )
         Spacer(modifier = Modifier.height(2.dp))
-        Text(text = "Good", color = Color.LightGray)
+        Text(text = "Good")
         Text(text = "Consistancy", fontSize = 28.sp, color = Color.White)
         Spacer(modifier = Modifier.height(12.dp))
+    }
+}
+
+@Composable
+private fun MenuItem(
+    @DrawableRes iconId: Int,
+    @StringRes textId: Int
+) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Icon(painter = painterResource(id = iconId), contentDescription = null)
+        Spacer(modifier = Modifier.width(24.dp))
+        Text(text = stringResource(id = textId), fontSize = 18.sp)
     }
 }
