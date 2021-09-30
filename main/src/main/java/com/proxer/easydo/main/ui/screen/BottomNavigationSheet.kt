@@ -12,10 +12,14 @@ import androidx.compose.ui.unit.dp
 import com.proxer.easydo.main.R
 
 @Composable
-fun NavigationSheet(onMenuOpenChanged: () -> Unit) {
+fun NavigationSheet(
+    onAddButtonPressed: () -> Unit,
+    onMenuOpenChanged: () -> Unit
+) {
     Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 20.dp)) {
         Icon(
             modifier = Modifier
+                .clickable { onAddButtonPressed() }
                 .align(Alignment.CenterHorizontally)
                 .size(24.dp),
             painter = painterResource(id = R.drawable.ic_plus),
