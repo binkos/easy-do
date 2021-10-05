@@ -18,7 +18,10 @@ class MainActivity : ComponentActivity() {
             var isDarkTheme by rememberSaveable { mutableStateOf(false) }
             TestTheme(isDarkTheme = isDarkTheme) {
                 Surface {
-                    MainNavGraph { isDarkTheme = it }
+                    MainNavGraph(
+                        finishActivity = { finish() },
+                        onThemeChanged = { isDarkTheme = it }
+                    )
                 }
             }
         }

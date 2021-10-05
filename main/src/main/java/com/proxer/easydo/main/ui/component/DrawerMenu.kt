@@ -1,4 +1,4 @@
-package com.proxer.easydo.main.ui.screen
+package com.proxer.easydo.main.ui.component
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
