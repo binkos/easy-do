@@ -5,4 +5,9 @@
     <string name="analytics">Analytics</string>
     <string name="tasks_count">%1$d tasks</string>
     <string name="todays_tasks">Today\'s tasks</string>
+    <string name="create_task">Create Task</string>
+    <string name="task_title">Task title</string>
+    <string name="done">Done</string>
+    <string name="select_category">Select category</string>
+    <string name="date_and_time">Date and time</string>
 </resources>

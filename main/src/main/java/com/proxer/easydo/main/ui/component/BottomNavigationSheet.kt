@@ -1,4 +1,4 @@
-package com.proxer.easydo.main.ui.screen
+package com.proxer.easydo.main.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,10 +13,11 @@ import com.proxer.easydo.main.R
 
 @Composable
 fun NavigationSheet(
+    modifier: Modifier = Modifier,
     onAddButtonPressed: () -> Unit,
     onMenuOpenChanged: () -> Unit
 ) {
-    Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 20.dp)) {
+    Column(modifier = modifier.padding(vertical = 8.dp, horizontal = 20.dp)) {
         Icon(
             modifier = Modifier
                 .clickable { onAddButtonPressed() }

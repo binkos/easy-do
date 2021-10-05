@@ -1,4 +1,4 @@
-package com.proxer.easydo.main.ui.screen
+package com.proxer.easydo.main.ui.component
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateDpAsState
@@ -13,11 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -31,13 +27,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(viewModel: MainViewModel, finishActivity: () -> Unit) {
 
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.mainState.collectAsState()
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState()
     val coroutineScope = rememberCoroutineScope()
 
     BackHandler {
         when {
-            !state.isDrawerClosed -> viewModel.sendEvent(MainEvent.ClickOnDrawer)
+            !state.isDrawerClosed -> viewModel.sendMainEvent(MainEvent.ClickOnDrawer)
             bottomSheetScaffoldState.bottomSheetState.isExpanded ->
                 coroutineScope.launch { bottomSheetScaffoldState.bottomSheetState.collapse() }
             else -> finishActivity()
@@ -46,7 +42,11 @@ fun MainScreen(viewModel: MainViewModel, finishActivity: () -> Unit) {
 
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
-        sheetContent = { BottomSheet { coroutineScope.launch { bottomSheetScaffoldState.bottomSheetState.collapse() } } },
+        sheetContent = {
+            BottomSheet(viewModel) {
+                coroutineScope.launch { bottomSheetScaffoldState.bottomSheetState.collapse() }
+            }
+        },
         sheetPeekHeight = 0.dp
     ) {
         BoxWithConstraints(modifier = Modifier.background(MaterialTheme.colors.primary)) {
@@ -81,7 +81,7 @@ fun MainScreen(viewModel: MainViewModel, finishActivity: () -> Unit) {
                     .fillMaxWidth(0.60f)
                     .fillMaxHeight()
             ) {
-                DrawerMenu { viewModel.sendEvent(MainEvent.ClickOnDrawer) }
+                DrawerMenu { viewModel.sendMainEvent(MainEvent.ClickOnDrawer) }
             }
         }
     }
@@ -94,37 +94,41 @@ private fun MainBody(
     viewModel: MainViewModel,
     onAddButtonPressed: () -> Unit
 ) {
-    Column(modifier = modifier.background(MaterialTheme.colors.surface)) {
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            modifier = Modifier.padding(start = 8.dp),
-            text = stringResource(R.string.categories).uppercase()
-        )
+    Box(modifier = modifier.background(MaterialTheme.colors.surface)) {
+        Column {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(R.string.categories).uppercase()
+            )
 
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            item { Spacer(Modifier) }
-            items(state.categories) { Category(it) }
-            item { Spacer(Modifier) }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            modifier = Modifier.padding(start = 8.dp),
-            text = stringResource(R.string.todays_tasks).uppercase()
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            items(state.tasks) {
-                Task(it) { task -> viewModel.sendEvent(MainEvent.CompleteTask(task)) }
+            Spacer(modifier = Modifier.height(8.dp))
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                item { Spacer(Modifier) }
+                items(state.categories) { Category(it) }
+                item { Spacer(Modifier) }
             }
-        }
 
-        Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = stringResource(R.string.todays_tasks).uppercase()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                items(state.taskModels) {
+                    Task(it) { task -> viewModel.sendMainEvent(MainEvent.CompleteTask(task)) }
+                }
+                item { Spacer(modifier = Modifier.height(8.dp)) }
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+        }
         NavigationSheet(
+            modifier = Modifier.align(Alignment.BottomCenter),
             onAddButtonPressed = { onAddButtonPressed() },
-            onMenuOpenChanged = { viewModel.sendEvent(MainEvent.ClickOnDrawer) }
+            onMenuOpenChanged = { viewModel.sendMainEvent(MainEvent.ClickOnDrawer) }
         )
     }
 }

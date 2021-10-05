@@ -1,6 +1,6 @@
 package com.proxer.easydo.main.ui.model
 
-data class Task(
+data class TaskModel(
     val id: Int,
     val name: String,
     val color: Long,

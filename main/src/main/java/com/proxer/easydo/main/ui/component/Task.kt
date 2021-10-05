@@ -1,4 +1,4 @@
-package com.proxer.easydo.main.ui.screen
+package com.proxer.easydo.main.ui.component
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -20,10 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.proxer.easydo.main.R
-import com.proxer.easydo.main.ui.model.Task
+import com.proxer.easydo.main.ui.model.TaskModel
 
 @Composable
-fun Task(model: Task, onTaskClickListener: (task: Task) -> Unit) {
+fun Task(model: TaskModel, onTaskClickListener: (taskModel: TaskModel) -> Unit) {
     Row(
         modifier = Modifier
             .padding(horizontal = 8.dp)

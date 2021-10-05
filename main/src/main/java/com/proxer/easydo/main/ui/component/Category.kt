@@ -1,4 +1,4 @@
-package com.proxer.easydo.main.ui.screen
+package com.proxer.easydo.main.ui.component
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
